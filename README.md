@@ -1,6 +1,6 @@
 # Orb Project Template
 
-[![CircleCI Build Status](https://circleci.com/gh/tadashi0713/flutter-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/tadashi0713/flutter-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/tadashi0713/flutter-orb.svg)](https://circleci.com/orbs/registry/orb/tadashi0713/flutter-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/tadashi0713/flutter-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
+[![CircleCI](https://circleci.com/gh/tadashi0713/flutter-orb/tree/main.svg?style=svg)](https://circleci.com/gh/tadashi0713/flutter-orb/tree/main) [![CircleCI Orb Version](https://badges.circleci.com/orbs/tadashi0713/flutter-orb.svg)](https://circleci.com/orbs/registry/orb/tadashi0713/flutter-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/tadashi0713/flutter-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 
 
