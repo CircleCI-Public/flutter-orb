@@ -1,15 +1,19 @@
 description: >
-  This command echos "Hello World" using file inclusion.
-# What will this command do?
-# Descriptions should be short, simple, and clear.
+  Install Flutter SDK
 parameters:
-  to:
+  version:
     type: string
-    default: "World"
-    description: "Hello to whom?"
+    description: The target version for the Flutter SDK.
+    default: "2.2.3"
+  os:
+    type: enum
+    enum: ["linux", "macos"]
+    description: The target Operating System for the Flutter SDK. Must be one of "linux", "macos".
+    default: "linux"
 steps:
   - run:
       environment:
-        PARAM_TO: <<parameters.to>>
-      name: Hello Greeting
-      command: <<include(scripts/greet.sh)>>
+        PARAM_VERSION: <<parameters.version>>
+        PARAM_OS: <<parameters.os>>
+      name: Install Flutter SDK
+      command: <<include(scripts/install.sh)>>
