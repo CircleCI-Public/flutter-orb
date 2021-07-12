@@ -12,8 +12,10 @@ parameters:
     default: "linux"
 steps:
   - run:
-      environment:
-        PARAM_VERSION: <<parameters.version>>
-        PARAM_OS: <<parameters.os>>
       name: Install Flutter SDK
-      command: <<include(scripts/install.sh)>>
+      command: |
+        mkdir ~/development && cd $_
+        if ! test -f "flutter_sdk.zip"; then curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/${<<parameters.os>>}/flutter_${<<parameters.os>>}_${<<parameters.version>>}-stable.zip; fi
+        unzip flutter_sdk.zip
+        echo 'export PATH=$PATH:`pwd`/flutter/bin' >> $BASH_ENV
+        which flutter
