@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   flutter-orb: tadashi0713/flutter-orb@<<pipeline.parameters.dev-orb-version>>
   orb-tools: circleci/orb-tools@10.0
+  android: circleci/android@1.0.3
 
 parameters:
   run-integration-tests:
