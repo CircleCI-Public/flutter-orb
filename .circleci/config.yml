@@ -18,13 +18,19 @@ parameters:
     default: "dev:alpha"
 
 jobs:
-  integration-test-macos:
+  integration-test-macos-install:
     macos:
       xcode: 12.5.1
     steps:
-      - checkout
       - flutter-orb/install:
           os: macos
+          version: 2.2.3
+  integration-test-linux-install:
+    executor:
+      name: android/android-machine
+    steps:
+      - flutter-orb/install:
+          os: linux
           version: 2.2.3
 
 workflows:
@@ -48,7 +54,8 @@ workflows:
   integration-test_deploy:
     when: << pipeline.parameters.run-integration-tests >>
     jobs:
-      - integration-test-macos
+      - integration-test-install-macos
+
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: tadashi0713/flutter-orb
           context: orb-publishing
@@ -56,7 +63,7 @@ workflows:
           fail-if-semver-not-indicated: true
           publish-version-tag: false
           requires:
-            - integration-test-macos
+            - integration-test-install-macos
           filters:
             branches:
               only:
