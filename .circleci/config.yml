@@ -54,8 +54,8 @@ workflows:
   integration-test_deploy:
     when: << pipeline.parameters.run-integration-tests >>
     jobs:
-      - integration-test-install-macos
-
+      - integration-test-macos-install
+      - integration-test-linux-install
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: tadashi0713/flutter-orb
           context: orb-publishing
@@ -63,7 +63,8 @@ workflows:
           fail-if-semver-not-indicated: true
           publish-version-tag: false
           requires:
-            - integration-test-install-macos
+            - integration-test-macos-install
+            - integration-test-linux-install
           filters:
             branches:
               only:
