@@ -18,7 +18,7 @@ steps:
         if [ << parameters.os >> == "macos" ]; then
           curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_<<parameters.version>>-stable.zip
           unzip flutter_sdk.zip
-        elsif [ << parameters.os >> == "linux" ]; then
+        elif [ << parameters.os >> == "linux" ]; then
           curl -o flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_<<parameters.version>>-stable.tar.xz
           tar xf flutter_sdk.tar.xz
         fi
