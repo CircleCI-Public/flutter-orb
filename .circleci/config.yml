@@ -26,6 +26,7 @@ jobs:
       - flutter-orb/install:
           os: macos
           version: 2.2.3
+      - run: flutter doctor
   integration-test-linux-install:
     executor:
       name: android/android-machine
@@ -33,6 +34,7 @@ jobs:
       - flutter-orb/install:
           os: linux
           version: 2.2.3
+      - run: flutter doctor
 
 workflows:
   test-pack:
