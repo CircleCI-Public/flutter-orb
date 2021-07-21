@@ -22,6 +22,6 @@ steps:
           curl -o flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_<<parameters.version>>-stable.tar.xz
           tar xf flutter_sdk.tar.xz
         fi
-        echo "export PATH=$PATH:$(pwd)/flutter/bin" >> ~/.zshrc
-        source ~/.zshrc
-  - run: flutter doctor
+        echo "export PATH=$(pwd)/flutter/bin:$PATH" >> $BASH_ENV
+        source $BASH_ENV
+        flutter doctor
