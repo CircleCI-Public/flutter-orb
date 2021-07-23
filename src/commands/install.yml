@@ -17,6 +17,6 @@ steps:
         if [ << parameters.os >> == "macos" ]; then
           HOMEBREW_NO_AUTO_UPDATE=1 brew install flutter
         elif [ << parameters.os >> == "linux" ]; then
-          snap install flutter
+          sudo snap install flutter
         fi
         flutter doctor
