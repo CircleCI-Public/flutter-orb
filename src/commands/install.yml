@@ -11,6 +11,7 @@ parameters:
     description: The target Operating System for the Flutter SDK. Must be one of "linux", "macos".
     default: "linux"
 steps:
+  - run: echo $SHELL
   - run:
       name: Install Flutter SDK
       command: |
