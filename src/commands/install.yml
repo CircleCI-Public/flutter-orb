@@ -24,4 +24,4 @@ steps:
         fi
         FLUTTER_PATH="`pwd`/flutter/bin"
         echo $FLUTTER_PATH
-        echo "export PATH=$FLUTTER_PATH:$PATH" >> $BASH_ENV
+        echo 'export PATH=$FLUTTER_PATH:$PATH' >> $BASH_ENV
