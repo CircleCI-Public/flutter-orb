@@ -34,7 +34,9 @@ jobs:
       - flutter-orb/install:
           os: linux
           version: 2.2.3
-      - run: flutter doctor
+      - run: |
+          source $BASH_ENV
+          flutter doctor
 
 workflows:
   test-pack:
