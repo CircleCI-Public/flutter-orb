@@ -34,7 +34,7 @@ jobs:
       - flutter-orb/install:
           os: linux
           version: 2.2.3
-      - run: flutter doctor
+      - run: git status
 
 workflows:
   test-pack:
