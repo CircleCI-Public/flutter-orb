@@ -11,7 +11,6 @@ parameters:
     description: The target Operating System for the Flutter SDK. Must be one of "linux", "macos".
     default: "linux"
 steps:
-  - run: echo $SHELL
   - run:
       name: Install Flutter SDK
       command: |
@@ -23,4 +22,6 @@ steps:
           curl -o flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_<<parameters.version>>-stable.tar.xz
           tar xf flutter_sdk.tar.xz
         fi
-        echo 'export PATH=/home/circleci/development/flutter/bin:$PATH' >> $BASH_ENV
+        FLUTTER_PATH="`pwd`/flutter/bin"
+        echo $FLUTTER_PATH
+        echo 'export PATH=$FLUTTER_PATH:$PATH' >> $BASH_ENV
