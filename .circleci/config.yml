@@ -23,6 +23,7 @@ jobs:
     macos:
       xcode: 12.5.1
     steps:
+      - checkout
       - flutter-orb/install:
           os: macos
           version: 2.2.3
@@ -31,6 +32,7 @@ jobs:
     executor:
       name: android/android-machine
     steps:
+      - checkout
       - flutter-orb/install:
           os: linux
           version: 2.2.3
