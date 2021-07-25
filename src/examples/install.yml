@@ -1,0 +1,19 @@
+description: >
+  Install Flutter SDK for macOS
+usage:
+  version: 2.1
+  orbs:
+    flutter-orb: tadashi0713/flutter-orb@0.0.1
+  jobs:
+    install_sdk_macos:
+      macos:
+        xcode: 12.5.1
+      steps:
+        - flutter-orb/install:
+            os: macos
+            version: 2.2.3
+        - run: flutter doctor
+  workflows:
+    install_sdk_macos:
+      jobs:
+        - install_sdk_macos
