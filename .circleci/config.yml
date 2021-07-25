@@ -23,7 +23,7 @@ jobs:
     macos:
       xcode: 12.5.1
     steps:
-      - flutter-orb/install:
+      - flutter-orb/install_sdk:
           os: macos
           version: 2.2.3
       - run: flutter doctor
@@ -31,7 +31,7 @@ jobs:
     executor:
       name: android/android-machine
     steps:
-      - flutter-orb/install:
+      - flutter-orb/install_sdk:
           os: linux
           version: 2.2.3
       - run: flutter doctor
