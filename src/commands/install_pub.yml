@@ -1,0 +1,23 @@
+description: >
+  Install your flutter packages with automated caching and best practices applied. Requires lock file.
+parameters:
+  app_dir:
+    default: .
+    description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
+    type: string
+working_directory: <<parameters.app_dir>>
+steps:
+  - restore_cache:
+      keys:
+        - 'dart-dependencies-{{ checksum "pubspec.lock" }}'
+        - dart-dependencies-
+  - run:
+      name: Install Dependencies
+      command: flutter pub get
+  - run:
+      name: Build
+      command: flutter packages pub run build_runner build
+  - save_cache:
+      paths:
+        - .dart_tool
+      key: 'dart-dependencies-{{ checksum "pubspec.lock" }}'

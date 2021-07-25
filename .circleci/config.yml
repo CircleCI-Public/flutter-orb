@@ -23,18 +23,22 @@ jobs:
     macos:
       xcode: 12.5.1
     steps:
+      - checkout
       - flutter-orb/install_sdk:
           os: macos
           version: 2.2.3
-      - run: flutter doctor
+      - flutter-orb/install_pub:
+          app_dir: ./sample
   integration-test-linux-install:
     executor:
       name: android/android-machine
     steps:
+      - checkout
       - flutter-orb/install_sdk:
           os: linux
           version: 2.2.3
-      - run: flutter doctor
+      - flutter-orb/install_pub:
+          app_dir: ./sample
 
 workflows:
   test-pack:

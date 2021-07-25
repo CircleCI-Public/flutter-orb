@@ -6,6 +6,3 @@ description: >
 display:
   home_url: "https://flutter.dev"
   source_url: "https://github.com/tadashi0713/flutter-orb"
-
-orbs:
-  android: circleci/android@1.0.3
