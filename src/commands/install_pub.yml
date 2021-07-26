@@ -8,7 +8,7 @@ parameters:
 steps:
   - restore_cache:
       keys:
-        - 'pub-dependencies-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}'
+        - 'pub-dependencies-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}-{{ arch }}'
   - run:
       name: Install Dependencies
       command: flutter pub get
@@ -16,4 +16,4 @@ steps:
   - save_cache:
       paths:
         - <<parameters.app-dir>>/.dart_tool
-      key: 'pub-dependencies-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}'
+      key: 'pub-dependencies-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}-{{ arch }}'
