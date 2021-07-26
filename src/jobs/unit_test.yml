@@ -1,0 +1,21 @@
+description: >
+  Run Unit Test
+parameters:
+  version:
+    type: string
+    description: The target version for the Flutter SDK.
+    default: "2.2.3"
+  app-dir:
+    default: .
+    description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
+    type: string
+docker:
+  - image: cirrusci/flutter:<<parameters.version>>
+steps:
+  - checkout
+  - install_pub:
+      app-dir: <<parameters.app-dir>>
+  - run:
+      name: Run Unit Test
+      command: flutter test
+      working_directory: <<parameters.app-dir>>

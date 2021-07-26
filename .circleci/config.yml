@@ -27,8 +27,6 @@ jobs:
       - flutter-orb/install_sdk
       - flutter-orb/install_pub:
           app-dir: ./sample
-      - flutter-orb/install_ios_pod:
-          app-dir: ./sample
   integration-test-linux:
     executor:
       name: android/android-machine
