@@ -6,9 +6,10 @@ parameters:
     description: The target version for the Flutter SDK.
     default: "2.2.3"
 steps:
+  - run: echo "export CONVERT_FLUTTER_VERSION=$(echo <<parameters.version>> | sed -e 's/\.//g')" >> $BASH_ENV
   - restore_cache:
       keys:
-        - 'flutter-sdk-{{ <<parameters.version>> | sed -e 's/\.//g' }}-{{ arch }}'
+        - 'flutter-sdk-{{ $CONVERT_FLUTTER_VERSION }}-{{ arch }}'
   - run:
       name: Install Flutter SDK
       command: |
@@ -28,4 +29,4 @@ steps:
   - save_cache:
       paths:
         - ~/development/flutter
-      key: 'flutter-sdk-{{ <<parameters.version>> | sed -e 's/\.//g' }}-{{ arch }}'
+      key: 'flutter-sdk-{{ $CONVERT_FLUTTER_VERSION }}-{{ arch }}'
