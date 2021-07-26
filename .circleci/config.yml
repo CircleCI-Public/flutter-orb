@@ -29,6 +29,8 @@ jobs:
           app-dir: ./sample
       - flutter-orb/install_ios_pod:
           app-dir: ./sample
+      - flutter-orb/install_ios_gem:
+          app-dir: ./sample
   integration-test-linux:
     executor:
       name: android/android-machine
@@ -38,6 +40,8 @@ jobs:
       - flutter-orb/install_pub:
           app-dir: ./sample
       - flutter-orb/install_android_gradle:
+          app-dir: ./sample
+      - flutter-orb/install_android_gem:
           app-dir: ./sample
 
 workflows:
@@ -65,6 +69,8 @@ workflows:
       - integration-test-linux
       - flutter-orb/unit_test:
           app-dir: ./sample
+      - flutter-orb/lint:
+          app-dir: ./sample
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: tadashi0713/flutter-orb
           context: orb-publishing
@@ -75,6 +81,7 @@ workflows:
             - integration-test-macos
             - integration-test-linux
             - flutter-orb/unit_test
+            - flutter-orb/lint
           filters:
             branches:
               only:
