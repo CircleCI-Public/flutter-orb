@@ -8,7 +8,7 @@ parameters:
 steps:
   - restore_cache:
       keys:
-        - 'flutter-sdk-{{ <<parameters.version>> }}-{{ arch }}'
+        - 'flutter-sdk-{{ <<parameters.version>> | sed -e 's/\.//g' }}-{{ arch }}'
   - run:
       name: Install Flutter SDK
       command: |
@@ -28,4 +28,4 @@ steps:
   - save_cache:
       paths:
         - ~/development/flutter
-      key: 'flutter-sdk-{{ <<parameters.version>> }}-{{ arch }}'
+      key: 'flutter-sdk-{{ <<parameters.version>> | sed -e 's/\.//g' }}-{{ arch }}'
