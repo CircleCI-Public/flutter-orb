@@ -35,6 +35,8 @@ jobs:
       - flutter-orb/install_sdk
       - flutter-orb/install_pub:
           app-dir: ./sample
+      - flutter-orb/install_android_gradle:
+          app-dir: ./sample
 
 workflows:
   test-pack:
