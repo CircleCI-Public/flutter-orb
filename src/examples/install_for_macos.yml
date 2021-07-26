@@ -3,15 +3,15 @@ description: >
 usage:
   version: 2.1
   orbs:
-    flutter-orb: tadashi0713/flutter-orb@0.0.2
+    flutter-orb: tadashi0713/flutter-orb@0.0.5
   jobs:
     install_sdk_macos:
       macos:
         xcode: 12.5.1
       steps:
         - flutter-orb/install_sdk:
-            os: macos
             version: 2.2.3
+        - flutter-orb/install_pub
         - run: flutter doctor
   workflows:
     install_sdk_macos:

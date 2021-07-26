@@ -1,0 +1,17 @@
+description: >
+  Install your Android gradle packages with automated caching and best practices applied. Requires build.gradle file.
+parameters:
+  app-dir:
+    default: .
+    description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
+    type: string
+steps:
+  - restore_cache:
+      key: jars-{{ checksum  "<< parameters.app-dir >>/android/app/build.gradle" }}
+  - run:
+      command: gradle androidDependencies
+      working_directory: << parameters.app-dir >>/android
+  - save_cache:
+      paths:
+        - ~/.gradle
+      key: jars-{{ checksum  "<< parameters.app-dir >>/android/app/build.gradle" }}

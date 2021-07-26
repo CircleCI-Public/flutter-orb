@@ -1,0 +1,20 @@
+description: >
+  Install Flutter SDK and packages for Android machine executor
+usage:
+  version: 2.1
+  orbs:
+    android: circleci/android@1.0.3
+    flutter-orb: tadashi0713/flutter-orb@0.0.5
+  jobs:
+    install_for_android_machine:
+      executor:
+        name: android/android-machine
+      steps:
+        - flutter-orb/install_sdk:
+            version: 2.2.3
+        - flutter-orb/install_pub
+        - flutter-orb/install_android_gradle
+  workflows:
+    install_for_android_machine:
+      jobs:
+        - install_for_android_machine
