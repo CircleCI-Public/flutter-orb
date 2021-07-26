@@ -69,7 +69,8 @@ workflows:
           requires:
             - integration-test-macos
             - integration-test-linux
-            - flutter-orb/unit_test
+            - flutter-orb/unit_test:
+                app-dir: ./sample
           filters:
             branches:
               only:
