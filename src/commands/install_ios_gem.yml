@@ -1,0 +1,23 @@
+description: >
+  Install your iOS Rubygems(mainly fastlane) with automated caching and best practices applied. Requires lock file.
+  https://flutter.dev/docs/deployment/cd
+parameters:
+  app-dir:
+    default: .
+    description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
+    type: string
+steps:
+  - restore_cache:
+      keys:
+        - 'bundle-v1-ios-{{ checksum "<< parameters.app-dir >>/ios/Gemfile.lock" }}'
+        - bundle-v1-ios-
+  - run:
+      name: Install Dependencies
+      command: |
+        bundle config set path ./vendor/bundle
+        bundle install
+      working_directory: <<parameters.app-dir>>/ios
+  - save_cache:
+      paths:
+        - <<parameters.app-dir>>/ios/vendor/bundle
+      key: 'bundle-v1-ios-{{ checksum "<< parameters.app-dir >>/ios/Gemfile.lock" }}'
