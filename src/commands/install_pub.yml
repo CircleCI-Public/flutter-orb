@@ -1,7 +1,7 @@
 description: >
   Install your flutter packages with automated caching and best practices applied. Requires lock file.
 parameters:
-  app_dir:
+  app-dir:
     default: .
     description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
     type: string
