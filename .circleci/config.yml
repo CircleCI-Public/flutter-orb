@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  # flutter-orb: tadashi0713/flutter-orb@<<pipeline.parameters.dev-orb-version>>
+  flutter-orb: tadashi0713/flutter-orb@<<pipeline.parameters.dev-orb-version>>
   orb-tools: circleci/orb-tools@10.0
   android: circleci/android@1.0.3
 
@@ -18,23 +18,23 @@ parameters:
     type: string
     default: "dev:alpha"
 
-# jobs:
-#   integration-test-macos-install:
-#     macos:
-#       xcode: 12.5.1
-#     steps:
-#       - checkout
-#       - flutter-orb/install_sdk
-#       - flutter-orb/install_pub:
-#           app_dir: ./sample
-#   integration-test-linux-install:
-#     executor:
-#       name: android/android-machine
-#     steps:
-#       - checkout
-#       - flutter-orb/install_sdk
-#       - flutter-orb/install_pub:
-#           app_dir: ./sample
+jobs:
+  integration-test-macos-install:
+    macos:
+      xcode: 12.5.1
+    steps:
+      - checkout
+      - flutter-orb/install_sdk
+      - flutter-orb/install_pub:
+          app-dir: ./sample
+  integration-test-linux-install:
+    executor:
+      name: android/android-machine
+    steps:
+      - checkout
+      - flutter-orb/install_sdk
+      - flutter-orb/install_pub:
+          app-dir: ./sample
 
 workflows:
   test-pack:
@@ -57,17 +57,17 @@ workflows:
   integration-test_deploy:
     when: << pipeline.parameters.run-integration-tests >>
     jobs:
-      # - integration-test-macos-install
-      # - integration-test-linux-install
+      - integration-test-macos-install
+      - integration-test-linux-install
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: tadashi0713/flutter-orb
           context: orb-publishing
           add-pr-comment: false
           fail-if-semver-not-indicated: true
-          publish-version-tag: true
-          # requires:
-          #   - integration-test-macos-install
-          #   - integration-test-linux-install
+          publish-version-tag: false
+          requires:
+            - integration-test-macos-install
+            - integration-test-linux-install
           filters:
             branches:
               only:
