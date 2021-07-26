@@ -6,8 +6,8 @@ parameters:
     description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
     type: string
 steps:
-  # - restore_cache:
-  #     key: jars-{{ checksum  "<< parameters.app-dir >>/android/app/build.gradle" }}
+  - restore_cache:
+      key: gradle-{{ checksum  "<< parameters.app-dir >>/android/app/build.gradle" }}
   - run:
       command: gradle androidDependencies
       working_directory: << parameters.app-dir >>/android
@@ -15,4 +15,4 @@ steps:
       paths:
         - ~/.gradle/caches
         - ~/.gradle/wrapper
-      key: jars-{{ checksum  "<< parameters.app-dir >>/android/app/build.gradle" }}
+      key: gradle-{{ checksum  "<< parameters.app-dir >>/android/app/build.gradle" }}
