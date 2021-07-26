@@ -59,7 +59,8 @@ workflows:
     jobs:
       - integration-test-macos
       - integration-test-linux
-      - flutter-orb/unit_test
+      - flutter-orb/unit_test:
+          app-dir: ./sample
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: tadashi0713/flutter-orb
           context: orb-publishing
@@ -69,8 +70,7 @@ workflows:
           requires:
             - integration-test-macos
             - integration-test-linux
-            - flutter-orb/unit_test:
-                app-dir: ./sample
+            - flutter-orb/unit_test
           filters:
             branches:
               only:
