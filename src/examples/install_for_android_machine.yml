@@ -4,7 +4,7 @@ usage:
   version: 2.1
   orbs:
     android: circleci/android@1.0.3
-    flutter-orb: tadashi0713/flutter-orb@0.0.6
+    flutter-orb: tadashi0713/flutter-orb@0.0.10
   jobs:
     install_for_android_machine:
       executor:
@@ -14,6 +14,7 @@ usage:
             version: 2.2.3
         - flutter-orb/install_pub
         - flutter-orb/install_android_gradle
+        - flutter-orb/install_android_gem
   workflows:
     install_for_android_machine:
       jobs:

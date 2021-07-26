@@ -16,5 +16,5 @@ steps:
       working_directory: <<parameters.app-dir>>
   - save_cache:
       paths:
-        - .dart_tool
+        - <<parameters.app-dir>>/.dart_tool
       key: 'dart-dependencies-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}'
