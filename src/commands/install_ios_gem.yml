@@ -10,7 +10,6 @@ steps:
   - restore_cache:
       keys:
         - 'bundle-v1-ios-{{ checksum "<< parameters.app-dir >>/ios/Gemfile.lock" }}'
-        - bundle-v1-ios-
   - run:
       name: Install Dependencies
       command: |

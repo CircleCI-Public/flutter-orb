@@ -9,7 +9,6 @@ steps:
   - restore_cache:
       keys:
         - 'pod-dependencies-{{ checksum "<< parameters.app-dir >>/ios/Podfile.lock" }}'
-        - pod-dependencies-
   - run:
       name: Install Dependencies
       command: pod install

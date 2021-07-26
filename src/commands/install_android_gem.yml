@@ -10,7 +10,6 @@ steps:
   - restore_cache:
       keys:
         - 'bundle-v1-android-{{ checksum "<< parameters.app-dir >>/android/Gemfile.lock" }}'
-        - bundle-v1-android-
   - run:
       name: Install Dependencies
       command: |

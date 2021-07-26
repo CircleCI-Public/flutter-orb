@@ -9,7 +9,6 @@ steps:
   - restore_cache:
       keys:
         - 'dart-dependencies-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}'
-        - dart-dependencies-
   - run:
       name: Install Dependencies
       command: flutter pub get
