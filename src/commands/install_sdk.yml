@@ -9,7 +9,7 @@ steps:
   - run: echo "export CONVERT_FLUTTER_VERSION=$(echo <<parameters.version>> | sed -e 's/\.//g')" >> $BASH_ENV
   - restore_cache:
       keys:
-        - 'flutter-sdk-{{ $CONVERT_FLUTTER_VERSION }}-{{ arch }}'
+        - 'flutter-sdk-{{ .Environment.CONVERT_FLUTTER_VERSION }}-{{ arch }}'
   - run:
       name: Install Flutter SDK
       command: |
@@ -29,4 +29,4 @@ steps:
   - save_cache:
       paths:
         - ~/development/flutter
-      key: 'flutter-sdk-{{ $CONVERT_FLUTTER_VERSION }}-{{ arch }}'
+      key: 'flutter-sdk-{{ .Environment.CONVERT_FLUTTER_VERSION }}-{{ arch }}'
