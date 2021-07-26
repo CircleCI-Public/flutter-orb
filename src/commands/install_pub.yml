@@ -14,10 +14,6 @@ steps:
       name: Install Dependencies
       command: flutter pub get
       working_directory: <<parameters.app-dir>>
-  - run:
-      name: Build
-      command: flutter packages pub run build_runner build
-      working_directory: <<parameters.app-dir>>
   - save_cache:
       paths:
         - .dart_tool

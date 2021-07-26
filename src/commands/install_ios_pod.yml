@@ -1,0 +1,20 @@
+description: >
+  Install your iOS cocoapods packages with automated caching and best practices applied. Requires lock file.
+parameters:
+  app-dir:
+    default: .
+    description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
+    type: string
+steps:
+  - restore_cache:
+      keys:
+        - 'pod-dependencies-{{ checksum "<< parameters.app-dir >>/ios/Podfile.lock" }}'
+        - pod-dependencies-
+  - run:
+      name: Install Dependencies
+      command: pod install
+      working_directory: <<parameters.app-dir>>/ios
+  - save_cache:
+      paths:
+        - <<parameters.app-dir>>/ios/Pods
+      key: 'pod-dependencies-{{ checksum "<< parameters.app-dir >>/ios/Podfile.lock" }}'
