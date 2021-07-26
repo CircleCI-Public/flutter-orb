@@ -6,10 +6,14 @@ parameters:
     default: .
     description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
     type: string
+  cache-version:
+    default: v1
+    description: Change the default cache version if you need to clear the cache for any reason.
+    type: string
 steps:
   - restore_cache:
       keys:
-        - 'bundle-v1-android-{{ checksum "<< parameters.app-dir >>/android/Gemfile.lock" }}'
+        - 'bundle-<<parameters.cache-version>>-android-{{ checksum "<< parameters.app-dir >>/android/Gemfile.lock" }}'
   - run:
       name: Install Dependencies
       command: |
@@ -19,4 +23,4 @@ steps:
   - save_cache:
       paths:
         - <<parameters.app-dir>>/android/vendor/bundle
-      key: 'bundle-v1-android-{{ checksum "<< parameters.app-dir >>/android/Gemfile.lock" }}'
+      key: 'bundle-<<parameters.cache-version>>-android-{{ checksum "<< parameters.app-dir >>/android/Gemfile.lock" }}'

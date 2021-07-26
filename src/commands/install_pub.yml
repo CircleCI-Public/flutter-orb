@@ -5,10 +5,14 @@ parameters:
     default: .
     description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
     type: string
+  cache-version:
+    default: v1
+    description: Change the default cache version if you need to clear the cache for any reason.
+    type: string
 steps:
   - restore_cache:
       keys:
-        - 'pub-dependencies-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}-{{ arch }}'
+        - 'pub-<<parameters.cache-version>>-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}-{{ arch }}'
   - run:
       name: Install Dependencies
       command: flutter pub get
@@ -16,4 +20,4 @@ steps:
   - save_cache:
       paths:
         - <<parameters.app-dir>>/.dart_tool
-      key: 'pub-dependencies-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}-{{ arch }}'
+      key: 'pub-<<parameters.cache-version>>-{{ checksum "<< parameters.app-dir >>/pubspec.lock" }}-{{ arch }}'
