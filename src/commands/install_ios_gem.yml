@@ -7,9 +7,9 @@ parameters:
     description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
     type: string
 steps:
-  - restore_cache:
-      keys:
-        - 'bundle-v1-ios-{{ checksum "<< parameters.app-dir >>/ios/Gemfile.lock" }}'
+  # - restore_cache:
+  #     keys:
+  #       - 'bundle-v1-ios-{{ checksum "<< parameters.app-dir >>/ios/Gemfile.lock" }}'
   - run:
       name: Install Dependencies
       command: |
