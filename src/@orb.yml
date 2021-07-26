@@ -1,7 +1,7 @@
 version: 2.1
 
 description: >
-  Easily install Flutter SDK. Supports Linux and macOS
+  Easily install Flutter SDK and package dependencies. Also wasily run unit test and lint. Supports Linux and macOS
 
 display:
   home_url: "https://flutter.dev"

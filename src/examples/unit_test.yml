@@ -3,7 +3,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    flutter-orb: tadashi0713/flutter-orb@0.0.6
+    flutter-orb: tadashi0713/flutter-orb@1.0.0
   workflows:
     test:
       jobs:
