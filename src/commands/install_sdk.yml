@@ -6,6 +6,9 @@ parameters:
     description: The target version for the Flutter SDK.
     default: "2.2.3"
 steps:
+  - restore_cache:
+      keys:
+        - 'flutter-sdk-{{ <<parameters.version>> }}-{{ arch }}'
   - run:
       name: Install Flutter SDK
       command: |
@@ -21,3 +24,8 @@ steps:
           exit 1
         fi
         echo 'export PATH=~/development/flutter/bin:$PATH' >> $BASH_ENV
+  - run: flutter doctor
+  - save_cache:
+      paths:
+        - ~/development/flutter
+      key: 'flutter-sdk-{{ <<parameters.version>> }}-{{ arch }}'
