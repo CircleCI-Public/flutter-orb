@@ -4,18 +4,20 @@ usage:
   version: 2.1
   orbs:
     android: circleci/android@1.0.3
-    flutter-orb: tadashi0713/flutter-orb@1.1.1
+    flutter-orb: tadashi0713/flutter-orb@1.2.0
   jobs:
-    install_for_android_machine:
+    distribute:
       executor:
         name: android/android-machine
       steps:
-        - flutter-orb/install_sdk:
+        - flutter-orb/install_sdk_and_pub:
             version: 2.2.3
-        - flutter-orb/install_pub
         - flutter-orb/install_android_gradle
         - flutter-orb/install_android_gem
+        - run:
+            command: bundle exec fastlane distribute
+            working_directory: ios
   workflows:
-    install_for_android_machine:
+    distribute:
       jobs:
-        - install_for_android_machine
+        - distribute

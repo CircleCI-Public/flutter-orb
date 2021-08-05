@@ -1,0 +1,21 @@
+description: >
+  Install Flutter SDK and your flutter packages with automated caching and best practices applied. Requires lock file.
+parameters:
+  flutter_version:
+    type: string
+    description: The target version for the Flutter SDK.
+    default: "2.2.3"
+  app-dir:
+    default: .
+    description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
+    type: string
+  cache-version:
+    default: v1
+    description: Change the default cache version if you need to clear the cache for any reason.
+    type: string
+steps:
+  - install_sdk:
+      version: <<parameters.flutter_version>>
+  - install_pub:
+      app-dir: <<parameters.app-dir>>
+      cache-version: <<parameters.app-dir>>
