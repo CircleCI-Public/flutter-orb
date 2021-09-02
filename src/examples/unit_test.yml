@@ -3,9 +3,9 @@ description: >
 usage:
   version: 2.1
   orbs:
-    flutter-orb: tadashi0713/flutter-orb@1.2.0
+    flutter: circleci/flutter@1.2.0
   workflows:
     test:
       jobs:
-        - flutter-orb/unit_test:
+        - flutter/unit_test:
             version: 2.2.3

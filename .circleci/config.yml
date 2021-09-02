@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  flutter-orb: tadashi0713/flutter-orb@<<pipeline.parameters.dev-orb-version>>
+  flutter-orb: circleci/flutter@<<pipeline.parameters.dev-orb-version>>
   orb-tools: circleci/orb-tools@10.0
   android: circleci/android@1.0.3
 
@@ -49,14 +49,14 @@ workflows:
       - orb-tools/lint
       - orb-tools/pack
       - orb-tools/publish-dev:
-          orb-name: tadashi0713/flutter-orb
-          context: orb-publishing
+          orb-name: circleci/flutter
+          context: orb-publisher
           requires:
             - orb-tools/lint
             - orb-tools/pack
       - orb-tools/trigger-integration-tests-workflow:
           name: trigger-integration-dev
-          context: orb-publishing
+          context: orb-publisher
           requires:
             - orb-tools/publish-dev
 
@@ -70,8 +70,8 @@ workflows:
       - flutter-orb/lint:
           app-dir: ./sample
       - orb-tools/dev-promote-prod-from-commit-subject:
-          orb-name: tadashi0713/flutter-orb
-          context: orb-publishing
+          orb-name: circleci/flutter
+          context: orb-publisher
           add-pr-comment: false
           fail-if-semver-not-indicated: true
           publish-version-tag: false
