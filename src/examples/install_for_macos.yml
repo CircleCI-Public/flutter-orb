@@ -3,16 +3,16 @@ description: >
 usage:
   version: 2.1
   orbs:
-    flutter-orb: tadashi0713/flutter-orb@1.2.0
+    flutter: circleci/flutter@1.0
   jobs:
     distribute:
       macos:
         xcode: 12.5.1
       steps:
-        - flutter-orb/install_sdk_and_pub:
+        - flutter/install_sdk_and_pub:
             version: 2.2.3
-        - flutter-orb/install_ios_pod
-        - flutter-orb/install_ios_gem
+        - flutter/install_ios_pod
+        - flutter/install_ios_gem
         - run:
             command: bundle exec fastlane distribute
             working_directory: ios

@@ -1,8 +1,8 @@
 version: 2.1
 
 description: >
-  Easily install Flutter SDK and package dependencies. Also easily run unit test and lint. Supports Linux and macOS
+  Easily install Flutter SDK, package dependencies, run unit test, lint and more on CircleCI. Supports Linux and macOS
 
 display:
   home_url: "https://flutter.dev"
-  source_url: "https://github.com/tadashi0713/flutter-orb"
+  source_url: "https://github.com/CircleCI-Public/flutter"

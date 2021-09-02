@@ -1,33 +1,41 @@
-# Orb Development Pipeline
+# Orb Project Template
+<!---
+[![CircleCI Build Status](https://circleci.com/gh/CircleCI-Public/flutter-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/CircleCI-Public/flutter-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/CircleCI/flutter.svg)](https://circleci.com/orbs/registry/orb/CircleCI/flutter) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/CircleCI-Public/flutter-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
-This configuration file uses [orb-tools orb]() version 10 to automatically _pack_, _test_, and _publish_ CircleCI orbs using this project structure. View the comments within the config file for a full break  down
+--->
 
-## Overview:
+A starter template for orb projects. Build, test, and publish orbs automatically on CircleCI with [Orb-Tools](https://circleci.com/orbs/registry/orb/circleci/orb-tools).
 
-**Imported Orbs**
+Additional READMEs are available in each directory.
 
-Both orb-tools and a development version of your orb will be imported into the config. On the first run, a `dev:alpha` development tag _must_ exist on your orb, but will be handled automatically from there on.
+**Meta**: This repository is open for contributions! Feel free to open a pull request with your changes. Due to the nature of this repository, it is not built on CircleCI. The Resources and How to Contribute sections relate to an orb created with this template, rather than the template itself.
 
-**Jobs**
+## Resources
 
-In the _jobs_ key, you will define _integration tests_. These jobs will utilize the functionality of your orb at run-time and attempt to validate their usage with live examples. Integration tests can be an excellent way of determining issues with parameters and run-time execution.
+[CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/CircleCI/flutter-orb) - The official registry page of this orb for all versions, executors, commands, and jobs described.
+[CircleCI Orb Docs](https://circleci.com/docs/2.0/orb-intro/#section=configuration) - Docs for using and creating CircleCI Orbs.
 
-### Workflows
+### How to Contribute
 
-There are two workflows which automate the pack, test, and publishing process.
+We welcome [issues](https://github.com/CircleCI-Public/flutter-orb/issues) to and [pull requests](https://github.com/CircleCI-Public/flutter-orb/pulls) against this repository!
 
-**test-pack**
+### How to Publish
+* Create and push a branch with your new features.
+* When ready to publish a new production version, create a Pull Request from _feature branch_ to `master`.
+* The title of the pull request must contain a special semver tag: `[semver:<segment>]` where `<segment>` is replaced by one of the following values.
 
-This is the first of the two workflows run. This workflow is responsible for any testing or prepping prior to integration tests. This is where linting occurs, shellchecking, BATS tests, or anything else that can be be tested without the need for further credentials.
+| Increment | Description|
+| ----------| -----------|
+| major     | Issue a 1.0.0 incremented release|
+| minor     | Issue a x.1.0 incremented release|
+| patch     | Issue a x.x.1 incremented release|
+| skip      | Do not issue a release|
 
-This Workflow will be placed on _hold_ prior to publishing a new development version of the orb (based on this commit), as this step requires access to specific publishing credentials.
+Example: `[semver:major]`
 
-This allows users to fork the orb repository and begin the pipeline, while the code-owners review that the code is safe to test in an environment where publishing keys will be present.
+* Squash and merge. Ensure the semver tag is preserved and entered as a part of the commit message.
+* On merge, after manual approval, the orb will automatically be published to the Orb Registry.
 
-Once approved, the development version of the orb will publish and the _trigger-integration-tests-workflow_ job will run, kicking off the next workflow
 
-**integration-test_deploy**
+For further questions/comments about this or other orbs, visit the Orb Category of [CircleCI Discuss](https://discuss.circleci.com/c/orbs).
 
-The second and final workflow is manually triggered by the _trigger-integration-tests-workflow_ job. In this run, the development version of the orb that was just published will be imported, and the integration tests will run.
-
-When running on the `master` branch (after merging to `master`), the workflow will additionally publish your new production orb.
