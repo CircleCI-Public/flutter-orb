@@ -10,6 +10,9 @@ parameters:
     default: "~/development"
     description: Install path for the Flutter binaries.
 steps:
+  - restore_cache:
+      keys:
+        - flutter-<<parameters.version>>-{{ arch }}
   - run:
       name: Install Flutter SDK
       command: |
@@ -28,3 +31,7 @@ steps:
         fi
         echo 'export PATH=<<parameters.install-location>>/flutter/bin:$PATH' >> $BASH_ENV
   - run: flutter doctor
+  - save_cache:
+      key: flutter-<<parameters.version>>-{{ arch }}
+      paths:
+        - <<parameters.install-location>>
