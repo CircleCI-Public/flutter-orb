@@ -17,7 +17,7 @@ Additional READMEs are available in each directory.
 
 ### How to Contribute
 
-We welcome [issues](https://github.com/circleci/flutter-orb/issues) to and [pull requests](https://github.com/circleci/flutter-orb/pulls) against this repository!
+We welcome [issues](https://github.com/CircleCI-Public/flutter-orb/issues) to and [pull requests](https://github.com/CircleCI-Public/flutter-orb/pulls) against this repository!
 
 ### How to Publish
 * Create and push a branch with your new features.
