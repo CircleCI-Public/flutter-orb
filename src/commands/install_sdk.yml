@@ -5,20 +5,26 @@ parameters:
     type: string
     description: The target version for the Flutter SDK.
     default: "2.2.3"
+  install-location:
+    type: string
+    default: "~/development"
+    description: Install path for the Flutter binaries.
 steps:
   - run:
       name: Install Flutter SDK
       command: |
-        mkdir ~/development && cd $_
+        mkdir -p <<parameters.install-location>>
         if [ "$(uname)" == 'Darwin' ]; then
           curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_<<parameters.version>>-stable.zip
-          unzip -qq flutter_sdk.zip
+          unzip -qq flutter_sdk.zip -d <<parameters.install-location>>
+          rm flutter_sdk.zip
         elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
           curl -o flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_<<parameters.version>>-stable.tar.xz
-          tar xf flutter_sdk.tar.xz
+          tar xf flutter_sdk.tar.xz -C <<parameters.install-location>>
+          rm -f flutter_sdk.tar.xz
         else
           echo "Your platform ($(uname -a)) is not supported."
           exit 1
         fi
-        echo 'export PATH=~/development/flutter/bin:$PATH' >> $BASH_ENV
+        echo 'export PATH=<<parameters.install-location>>/flutter/bin:$PATH' >> $BASH_ENV
   - run: flutter doctor
