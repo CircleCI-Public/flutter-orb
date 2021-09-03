@@ -5,4 +5,4 @@ description: >
 
 display:
   home_url: "https://flutter.dev"
-  source_url: "https://github.com/CircleCI-Public/flutter"
+  source_url: "https://github.com/CircleCI-Public/flutter-orb"
