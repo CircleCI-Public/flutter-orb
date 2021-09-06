@@ -31,11 +31,8 @@ steps:
             exit 1
           fi
         fi
-  - run:
-      name: Add path & flutter doctor
-      command: |
         echo 'export PATH=<<parameters.install-location>>/flutter/bin:$PATH' >> $BASH_ENV
-        flutter doctor
+  - run: flutter doctor
   - save_cache:
       key: flutter-<<parameters.version>>-{{ arch }}
       paths:
