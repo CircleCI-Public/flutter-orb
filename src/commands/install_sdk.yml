@@ -21,4 +21,3 @@ steps:
           exit 1
         fi
         echo 'export PATH=~/development/flutter/bin:$PATH' >> $BASH_ENV
-  - run: flutter doctor
