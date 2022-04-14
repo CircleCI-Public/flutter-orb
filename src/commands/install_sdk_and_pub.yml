@@ -5,6 +5,10 @@ parameters:
     type: string
     description: The target version for the Flutter SDK.
     default: "2.2.3"
+  install-location:
+    type: string
+    default: "~/development"
+    description: Install path for the Flutter binaries.
   app-dir:
     default: .
     description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
@@ -16,6 +20,7 @@ parameters:
 steps:
   - install_sdk:
       version: <<parameters.flutter_version>>
+      install-location: <<parameters.install-location>>
   - install_pub:
       app-dir: <<parameters.app-dir>>
       cache-version: <<parameters.app-dir>>
