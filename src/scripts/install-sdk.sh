@@ -14,5 +14,4 @@ if [ ! -d "$ORB_PARAM_INSTALL_LOCATION/flutter" ]; then
     exit 1
   fi
 fi
-# shellcheck disable=SC2016
-echo 'export PATH=$ORB_PARAM_INSTALL_LOCATION/flutter/bin:$PATH' >> "$BASH_ENV"
+echo "export PATH=$ORB_PARAM_INSTALL_LOCATION/flutter/bin:$PATH ">> "$BASH_ENV"
