@@ -11,22 +11,22 @@ jobs:
       xcode: 12.5.1
     steps:
       - checkout
-      - flutter-orb/install_sdk_and_pub:
+      - flutter/install_sdk_and_pub:
           app-dir: ./sample
-      - flutter-orb/install_ios_pod:
+      - flutter/install_ios_pod:
           app-dir: ./sample
-      - flutter-orb/install_ios_gem:
+      - flutter/install_ios_gem:
           app-dir: ./sample
   integration-test-linux:
     executor:
       name: android/android-machine
     steps:
       - checkout
-      - flutter-orb/install_sdk_and_pub:
+      - flutter/install_sdk_and_pub:
           app-dir: ./sample
-      - flutter-orb/install_android_gradle:
+      - flutter/install_android_gradle:
           app-dir: ./sample
-      - flutter-orb/install_android_gem:
+      - flutter/install_android_gem:
           app-dir: ./sample
 workflows:
   test-deploy:
@@ -36,10 +36,10 @@ workflows:
           filters: *filters
       - integration-test-linux:
           filters: *filters
-      - flutter-orb/unit_test:
+      - flutter/unit_test:
           app-dir: ./sample
           filters: *filters
-      - flutter-orb/lint:
+      - flutter/lint:
           app-dir: ./sample
           filters: *filters
       - orb-tools/pack:
@@ -53,8 +53,8 @@ workflows:
             - orb-tools/pack
             - integration-test-macos
             - integration-test-linux
-            - flutter-orb/unit_test
-            - flutter-orb/lint
+            - flutter/unit_test
+            - flutter/lint
           context: orb-publisher
           filters:
             branches:
