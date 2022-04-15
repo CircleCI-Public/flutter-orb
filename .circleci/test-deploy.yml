@@ -1,0 +1,63 @@
+version: 2.1
+orbs:
+  flutter: circleci/flutter@dev:<<pipeline.git.revision>>
+  orb-tools: circleci/orb-tools@11.1
+filters: &filters
+  tags:
+    only: /.*/
+jobs:
+  integration-test-macos:
+    macos:
+      xcode: 12.5.1
+    steps:
+      - checkout
+      - flutter-orb/install_sdk_and_pub:
+          app-dir: ./sample
+      - flutter-orb/install_ios_pod:
+          app-dir: ./sample
+      - flutter-orb/install_ios_gem:
+          app-dir: ./sample
+  integration-test-linux:
+    executor:
+      name: android/android-machine
+    steps:
+      - checkout
+      - flutter-orb/install_sdk_and_pub:
+          app-dir: ./sample
+      - flutter-orb/install_android_gradle:
+          app-dir: ./sample
+      - flutter-orb/install_android_gem:
+          app-dir: ./sample
+workflows:
+  test-deploy:
+    jobs:
+      # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
+      - integration-test-macos:
+          filters: *filters
+      - integration-test-linux:
+          filters: *filters
+      - flutter-orb/unit_test:
+          app-dir: ./sample
+          filters: *filters
+      - flutter-orb/lint:
+          app-dir: ./sample
+          filters: *filters
+      - orb-tools/pack:
+          filters: *filters
+      - orb-tools/publish:
+          orb-name: circleci/flutter
+          vcs-type: << pipeline.project.type >>
+          github-token: GHI_TOKEN
+          pub-type: production
+          requires:
+            - orb-tools/pack
+            - integration-test-macos
+            - integration-test-linux
+            - flutter-orb/unit_test
+            - flutter-orb/lint
+          context: orb-publisher
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v[0-9]+\.[0-9]+\.[0-9]+$/

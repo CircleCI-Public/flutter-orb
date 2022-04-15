@@ -14,24 +14,11 @@ steps:
       keys:
         - flutter-<<parameters.version>>-{{ arch }}
   - run:
-      name: Install Flutter SDK if not exists
-      command: |
-        if [ ! -d <<parameters.install-location>>/flutter ]; then
-          mkdir -p <<parameters.install-location>>
-          if [ "$(uname)" == 'Darwin' ]; then
-            curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_<<parameters.version>>-stable.zip
-            unzip -qq flutter_sdk.zip -d <<parameters.install-location>>
-            rm flutter_sdk.zip
-          elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-            curl -o flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_<<parameters.version>>-stable.tar.xz
-            tar xf flutter_sdk.tar.xz -C <<parameters.install-location>>
-            rm -f flutter_sdk.tar.xz
-          else
-            echo "Your platform ($(uname -a)) is not supported."
-            exit 1
-          fi
-        fi
-        echo 'export PATH=<<parameters.install-location>>/flutter/bin:$PATH' >> $BASH_ENV
+      name: Install Flutter SDK if it does not exists
+      environment:
+        ORB_PARAM_INSTALL_LOCATION: <<parameters.install-location>>
+        ORB_PARAM_FLUTTER_SDK_VERSION: <<parameters.version>>
+      command: <<include(scripts/install-sdk.sh)>>
   - run: flutter doctor
   - save_cache:
       key: flutter-<<parameters.version>>-{{ arch }}
