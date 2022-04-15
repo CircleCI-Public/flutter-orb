@@ -1,87 +1,38 @@
 version: 2.1
-
+setup: true
 orbs:
-  flutter-orb: circleci/flutter@<<pipeline.parameters.dev-orb-version>>
-  orb-tools: circleci/orb-tools@10.0
-  android: circleci/android@1.0.3
+  orb-tools: circleci/orb-tools@11.1
+  shellcheck: circleci/shellcheck@3.1
 
-parameters:
-  run-integration-tests:
-    description: An internal flag to prevent integration test from running before a development version has been created.
-    type: boolean
-    default: false
-  dev-orb-version:
-    description: >
-      The development version of the orb to test.
-      This value is automatically adjusted by the "trigger-integration-tests-workflow" job to correspond with the specific version created by the commit and should not be edited.
-      A "dev:alpha" version must exist for the initial pipeline run.
-    type: string
-    default: "dev:alpha"
-
-jobs:
-  integration-test-macos:
-    macos:
-      xcode: 12.5.1
-    steps:
-      - checkout
-      - flutter-orb/install_sdk_and_pub:
-          app-dir: ./sample
-      - flutter-orb/install_ios_pod:
-          app-dir: ./sample
-      - flutter-orb/install_ios_gem:
-          app-dir: ./sample
-  integration-test-linux:
-    executor:
-      name: android/android-machine
-    steps:
-      - checkout
-      - flutter-orb/install_sdk_and_pub:
-          app-dir: ./sample
-      - flutter-orb/install_android_gradle:
-          app-dir: ./sample
-      - flutter-orb/install_android_gem:
-          app-dir: ./sample
+filters: &filters
+  tags:
+    only: /.*/
 
 workflows:
-  test-pack:
-    unless: << pipeline.parameters.run-integration-tests >>
+  lint-pack:
     jobs:
-      - orb-tools/lint
-      - orb-tools/pack
-      - orb-tools/publish-dev:
+      - orb-tools/lint:
+          filters: *filters
+      - orb-tools/pack:
+          filters: *filters
+      - orb-tools/review:
+          exclude: RC008, RC009
+          filters: *filters
+      - shellcheck/check:
+          exclude: SC2148,SC2038,SC2086,SC2002,SC2016
+          filters: *filters
+      - orb-tools/publish:
           orb-name: circleci/flutter
-          context: orb-publisher
+          github-token: GHI_TOKEN
+          vcs-type: << pipeline.project.type >>
           requires:
-            - orb-tools/lint
-            - orb-tools/pack
-      - orb-tools/trigger-integration-tests-workflow:
-          name: trigger-integration-dev
+            [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
+          # Use a context to hold your publishing token.
           context: orb-publisher
-          requires:
-            - orb-tools/publish-dev
-
-  integration-test_deploy:
-    when: << pipeline.parameters.run-integration-tests >>
-    jobs:
-      - integration-test-macos
-      - integration-test-linux
-      - flutter-orb/unit_test:
-          app-dir: ./sample
-      - flutter-orb/lint:
-          app-dir: ./sample
-      - orb-tools/dev-promote-prod-from-commit-subject:
-          orb-name: circleci/flutter
-          context: orb-publisher
-          add-pr-comment: false
-          fail-if-semver-not-indicated: true
-          publish-version-tag: false
-          requires:
-            - integration-test-macos
-            - integration-test-linux
-            - flutter-orb/unit_test
-            - flutter-orb/lint
-          filters:
-            branches:
-              only:
-                - master
-                - main
+          filters: *filters
+      # Triggers the next workflow in the Orb Development Kit.
+      - orb-tools/continue:
+          pipeline-number: << pipeline.number >>
+          vcs-type: << pipeline.project.type >>
+          requires: [orb-tools/publish]
+          filters: *filters

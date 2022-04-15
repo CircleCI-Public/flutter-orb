@@ -13,6 +13,7 @@ steps:
   - restore_cache:
       key: gradle-<<parameters.cache-version>>-{{ checksum  "<< parameters.app-dir >>/android/app/build.gradle" }}
   - run:
+      name: Installing Android gradle packages
       command: gradle androidDependencies
       working_directory: << parameters.app-dir >>/android
   - save_cache:
