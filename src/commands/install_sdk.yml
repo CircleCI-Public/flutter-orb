@@ -22,6 +22,8 @@ steps:
   - run:
       name: Run flutter doctor
       command: |
+        cat $BASH_ENV
+        source $BASH_ENV
         echo "TEST: ${TESTENV_DEBUG}"
         echo
         echo $PATH
