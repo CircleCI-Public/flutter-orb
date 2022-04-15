@@ -15,3 +15,4 @@ if [ ! -d "$ORB_PARAM_INSTALL_LOCATION/flutter" ]; then
   fi
 fi
 echo "export PATH=$ORB_PARAM_INSTALL_LOCATION/flutter/bin:$PATH">> "$BASH_ENV"
+echo 'export TESTENV_DEBUG="THIS HAS BEEN SOURCED"' >> "$BASH_ENV"
