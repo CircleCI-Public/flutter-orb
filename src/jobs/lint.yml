@@ -1,10 +1,10 @@
 description: >
    Run static analysis(flutter analyze)
 parameters:
-  version:
+  flutter-version:
     type: string
     description: The target version for the Flutter SDK.
-    default: "2.2.3"
+    default: "3.0.3"
   app-dir:
     default: .
     description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
