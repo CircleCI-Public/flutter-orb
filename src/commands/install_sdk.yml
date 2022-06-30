@@ -1,7 +1,7 @@
 description: >
   Install Flutter SDK
 parameters:
-  version:
+  flutter_version:
     type: string
     description: The target version for the Flutter SDK.
     default: "3.0.3"

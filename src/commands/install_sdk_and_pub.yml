@@ -19,7 +19,7 @@ parameters:
     type: string
 steps:
   - install_sdk:
-      version: <<parameters.flutter_version>>
+      flutter_version: <<parameters.flutter_version>>
       install-location: <<parameters.install-location>>
   - install_pub:
       app-dir: <<parameters.app-dir>>
