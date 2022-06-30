@@ -4,7 +4,7 @@ parameters:
   flutter_version:
     type: string
     description: The target version for the Flutter SDK.
-    default: "2.2.3"
+    default: "3.0.3"
   install-location:
     type: string
     default: "~/development"
