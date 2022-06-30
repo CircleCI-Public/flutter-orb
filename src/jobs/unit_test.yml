@@ -1,7 +1,7 @@
 description: >
   Run Unit Test
 parameters:
-  flutter_version:
+  flutter-version:
     type: string
     description: The target version for the Flutter SDK.
     default: "3.0.3"
