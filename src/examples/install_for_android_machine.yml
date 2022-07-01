@@ -11,7 +11,7 @@ usage:
         name: android/android-machine
       steps:
         - flutter/install_sdk_and_pub:
-            version: 2.2.3
+            flutter-version: 3.0.3
         - flutter/install_android_gradle
         - flutter/install_android_gem
         - run:
