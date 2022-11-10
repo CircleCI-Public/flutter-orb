@@ -7,7 +7,7 @@ parameters:
     default: "2.2.3"
   install-location:
     type: string
-    default: "/usr/local/flutter"
+    default: "~/usr/development"
     description: Install path for the Flutter binaries.
 steps:
   - restore_cache:
@@ -21,7 +21,9 @@ steps:
       command: <<include(scripts/install-sdk.sh)>>
   - run:
       name: Run flutter doctor
-      command: echo "hello"
+      command: |
+        echo "export PATH=$INSTALL_LOCATION/flutter/bin:$PATH" >> "$BASH_ENV"
+        source "$BASH_ENV"
   - save_cache:
       key: flutter-<<parameters.version>>-{{ arch }}
       paths:
