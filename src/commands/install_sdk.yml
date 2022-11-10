@@ -16,8 +16,8 @@ steps:
   - run:
       name: Install Flutter SDK if it does not exists
       environment:
-        ORB_PARAM_INSTALL_LOCATION: <<parameters.install-location>>
-        ORB_PARAM_FLUTTER_SDK_VERSION: <<parameters.version>>
+        ORB_EVAL_INSTALL_LOCATION: <<parameters.install-location>>
+        ORB_VAL_FLUTTER_SDK_VERSION: <<parameters.version>>
       command: <<include(scripts/install-sdk.sh)>>
   - run:
       name: Run flutter doctor
