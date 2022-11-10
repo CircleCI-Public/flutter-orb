@@ -24,6 +24,7 @@ jobs:
     steps:
       - checkout
       - flutter/install_sdk_and_pub:
+          cache-version: v2
           app-dir: ./sample
       - flutter/install_android_gradle:
           app-dir: ./sample
