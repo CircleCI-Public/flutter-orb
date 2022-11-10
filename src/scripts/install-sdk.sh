@@ -19,4 +19,6 @@ if [ ! -d "$INSTALL_LOCATION/flutter" ]; then
 fi
 
 echo "export PATH=$INSTALL_LOCATION/flutter/bin:$PATH">> "$BASH_ENV"
-echo 'export TESTENV_DEBUG="THIS HAS BEEN SOURCED"' >> "$BASH_ENV"
+
+# shellcheck source=/dev/null
+source "$BASH_ENV"
