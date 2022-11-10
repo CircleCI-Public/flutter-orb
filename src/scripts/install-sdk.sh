@@ -17,6 +17,3 @@ if [ ! -d "$INSTALL_LOCATION/flutter" ]; then
     exit 1
   fi
 fi
-
-ls -la "$INSTALL_LOCATION"/flutter
-echo "export PATH=$INSTALL_LOCATION/flutter/bin:$PATH" >> "$BASH_ENV"
