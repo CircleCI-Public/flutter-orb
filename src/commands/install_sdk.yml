@@ -7,7 +7,7 @@ parameters:
     default: "2.2.3"
   install-location:
     type: string
-    default: "~/development"
+    default: "/usr/local/flutter"
     description: Install path for the Flutter binaries.
 steps:
   - restore_cache:
