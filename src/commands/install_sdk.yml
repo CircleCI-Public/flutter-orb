@@ -21,10 +21,7 @@ steps:
       command: <<include(scripts/install-sdk.sh)>>
   - run:
       name: Run flutter doctor
-      command: |
-        echo "export PATH=$INSTALL_LOCATION/flutter/bin:$PATH" >> "$BASH_ENV"
-        source "$BASH_ENV"
-        flutter doctor
+      command: flutter doctor
   - save_cache:
       key: flutter-<<parameters.version>>-{{ arch }}
       paths:
