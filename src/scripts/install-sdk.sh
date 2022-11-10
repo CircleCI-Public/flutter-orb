@@ -10,7 +10,7 @@ if [ ! -d "$ORB_PARAM_INSTALL_LOCATION/flutter" ]; then
     tar xf flutter_sdk.tar.xz -C "$ORB_PARAM_INSTALL_LOCATION"
     rm -f flutter_sdk.tar.xz
   else
-    echo "Your platform ($(uname -a)) is not supported."
+    echo "This platform ($(uname -a)) is not supported."
     exit 1
   fi
 fi
