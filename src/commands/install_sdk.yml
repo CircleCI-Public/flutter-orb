@@ -22,13 +22,10 @@ steps:
   - run:
       name: Run flutter doctor
       command: |
-        cat $BASH_ENV
-        source $BASH_ENV
-        echo "TEST: ${TESTENV_DEBUG}"
-        echo
-        echo $PATH
-        echo
+        set -x
+        which flutter
         flutter doctor
+        set +x
   - save_cache:
       key: flutter-<<parameters.version>>-{{ arch }}
       paths:
