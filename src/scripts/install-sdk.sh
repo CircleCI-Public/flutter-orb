@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-INSTALL_LOCATION=$(eval "echo $INSTALL_LOCATION")
+INSTALL_LOCATION=$(eval "echo $ORB_EVAL_INSTALL_LOCATION")
 
 if [ ! -d "$INSTALL_LOCATION/flutter" ]; then
   mkdir -p "$INSTALL_LOCATION"
