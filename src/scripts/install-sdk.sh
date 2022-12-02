@@ -20,6 +20,8 @@ fi
 
 echo "export PATH=$INSTALL_LOCATION/flutter/bin:$PATH" >> "$BASH_ENV"
 
+cat "$BASH_ENV"
+
 # shellcheck source=/dev/null
 source "$BASH_ENV"
 which flutter
