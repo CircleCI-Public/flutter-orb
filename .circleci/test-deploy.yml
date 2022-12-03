@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   flutter: circleci/flutter@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
-  android: circleci/android@1.0.3
+  android: circleci/android@2.1.2
 filters: &filters
   tags:
     only: /.*/
