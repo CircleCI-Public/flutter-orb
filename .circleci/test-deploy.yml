@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   flutter: circleci/flutter@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
-  android: circleci/android@1.0.3
+  android: circleci/android@2.1.2
 filters: &filters
   tags:
     only: /.*/
@@ -21,9 +21,11 @@ jobs:
   integration-test-linux:
     executor:
       name: android/android-machine
+      tag: '2022.09.1'
     steps:
       - checkout
       - flutter/install_sdk_and_pub:
+          cache-version: v2
           app-dir: ./sample
       - flutter/install_android_gradle:
           app-dir: ./sample
