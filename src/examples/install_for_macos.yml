@@ -3,7 +3,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    flutter: circleci/flutter@1.0
+    flutter: circleci/flutter@2.0.0
   jobs:
     distribute:
       macos:
