@@ -1,7 +1,7 @@
 description: >
   Install Flutter SDK and your flutter packages with automated caching and best practices applied. Requires lock file.
 parameters:
-  flutter_version:
+  version:
     type: string
     description: The target version for the Flutter SDK.
     default: "3.0.3"
@@ -19,7 +19,7 @@ parameters:
     type: string
 steps:
   - install_sdk:
-      version: <<parameters.flutter_version>>
+      version: <<parameters.version>>
       install-location: <<parameters.install-location>>
   - install_pub:
       app-dir: <<parameters.app-dir>>
