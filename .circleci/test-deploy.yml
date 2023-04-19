@@ -47,19 +47,11 @@ workflows:
           filters: *filters
       - flutter/unit_test:
           app-dir: ./sample
-          filters: *filters
-      - flutter/lint:
-          app-dir: ./sample
-          filters: *filters
-      - flutter/unit_test:
-          app-dir: ./sample
           registry: "ghcr.io/cirruslabs"
           version: "3.7.7"
           filters: *filters
       - flutter/lint:
           app-dir: ./sample
-          registry: "ghcr.io/cirruslabs"
-          version: "3.7.7"
           filters: *filters
       - orb-tools/pack:
           filters: *filters
