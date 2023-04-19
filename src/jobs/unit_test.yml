@@ -1,6 +1,11 @@
 description: >
   Run Unit Test
 parameters:
+  registry:
+    type: enum
+    enum: ["cirrusci", "ghcr.io/cirruslabs"]
+    description: The registry to get the flutter image from, ghrc.io should be used for all flutter versions > 3.7.7.
+    default: "cirrusci"
   version:
     type: string
     description: The target version for the Flutter SDK.
@@ -14,7 +19,7 @@ parameters:
     description: Change the default cache version if you need to clear the cache for any reason.
     type: string
 docker:
-  - image: cirrusci/flutter:<<parameters.version>>
+  - image: <<parameters.registry>>/flutter:<<parameters.version>>
 steps:
   - checkout
   - install_pub:
