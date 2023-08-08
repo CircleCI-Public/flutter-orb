@@ -14,6 +14,10 @@ parameters:
     default: .
     description: Path to the directory containing your pubspec.yaml file. Not needed if pubspec.yaml lives in the root.
     type: string
+  analyze-dir:
+    default: lib
+    description: Path to the directory containing your Dart source code to analyze.
+    type: string
   cache-version:
     default: v1
     description: Change the default cache version if you need to clear the cache for any reason.
@@ -27,5 +31,5 @@ steps:
       cache-version: <<parameters.cache-version>>
   - run:
       name: Run static analysis
-      command: flutter analyze lib
+      command: flutter analyze <<parameters.analyze-dir>>
       working_directory: <<parameters.app-dir>>
