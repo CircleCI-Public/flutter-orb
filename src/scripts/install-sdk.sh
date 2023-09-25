@@ -14,7 +14,12 @@ if [ ! -d "$INSTALL_LOCATION/flutter" ]; then
     unzip -qq flutter_sdk.zip -d "$INSTALL_LOCATION"
     rm flutter_sdk.zip
   elif uname -a | grep -q "Linux" ; then
-    curl -o flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$ORB_VAL_FLUTTER_SDK_VERSION-stable.tar.xz
+    ENV_IS_ARM=$(! dpkg --print-architecture | grep -q arm; echo $?)
+    if [ "$ENV_IS_ARM" == "arm" ]; then
+      curl -o flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_arm64_$ORB_VAL_FLUTTER_SDK_VERSION-stable.tar.xz
+    else
+      curl -o flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$ORB_VAL_FLUTTER_SDK_VERSION-stable.tar.xz
+    fi
     tar xf flutter_sdk.tar.xz -C "$INSTALL_LOCATION"
     rm -f flutter_sdk.tar.xz
   else
