@@ -5,7 +5,12 @@ INSTALL_LOCATION=$(eval "echo $ORB_EVAL_INSTALL_LOCATION")
 if [ ! -d "$INSTALL_LOCATION/flutter" ]; then
   mkdir -p "$INSTALL_LOCATION"
   if [ "$(uname)" == 'Darwin' ]; then
-    curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_$ORB_VAL_FLUTTER_SDK_VERSION-stable.zip
+    if [ "$(uname -m)" == "arm64" ]; then
+      echo "Installing Flutter for ARM64"
+      curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_$ORB_VAL_FLUTTER_SDK_VERSION-stable.zip
+    else
+      curl -o flutter_sdk.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_$ORB_VAL_FLUTTER_SDK_VERSION-stable.zip
+    fi
     unzip -qq flutter_sdk.zip -d "$INSTALL_LOCATION"
     rm flutter_sdk.zip
   elif uname -a | grep -q "Linux" ; then
