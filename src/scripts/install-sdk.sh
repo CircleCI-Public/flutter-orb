@@ -11,7 +11,7 @@ function install_flutter() {
 
   baseurl="https://storage.googleapis.com/flutter_infra_release/releases/stable"
 
-  fullurl="$baseurl/$uname/${version}_$ORB_VAL_FLUTTER_SK_VERSION-stable.${suffix}"
+  fullurl="$baseurl/$uname/${version}_$ORB_VAL_FLUTTER_SDK_VERSION-stable.${suffix}"
 
   curl -o "flutter_sdk.${suffix}" "$fullurl"
 }
