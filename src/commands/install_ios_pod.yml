@@ -9,13 +9,17 @@ parameters:
     default: v1
     description: Change the default cache version if you need to clear the cache for any reason.
     type: string
+  repo-update:
+            default: false
+            description: Whether to run 'pod install' with the '--repo-update' option.
+            type: boolean
 steps:
   - restore_cache:
       keys:
         - 'pod-<<parameters.cache-version>>-{{ checksum "<< parameters.app-dir >>/ios/Podfile.lock" }}'
   - run:
       name: Install Dependencies
-      command: pod install
+      command: pod install <<#parameters.repo-update>>--repo-update<</parameters.repo-update>>
       working_directory: <<parameters.app-dir>>/ios
   - save_cache:
       paths:
