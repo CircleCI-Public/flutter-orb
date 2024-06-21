@@ -26,16 +26,13 @@ function install_flutter() {
   rm -f "flutter_sdk.${suffix}"
 }
 
+echo "export PATH=$INSTALL_LOCATION/flutter/bin:\$PATH" >> "$BASH_ENV"
+# shellcheck source=/dev/null
+source "$BASH_ENV"
 
 if ! command -v flutter &> /dev/null; then
   install_flutter "$(uname)" "$(uname -m)"
+  echo "Flutter installed: $(eval command -v flutter)"
 else
   echo "Previous Flutter installation detected: $(eval command -v flutter)"
-  exit 0
 fi
-
-echo "export PATH=$INSTALL_LOCATION/flutter/bin:\$PATH" >> "$BASH_ENV"
-
-# shellcheck source=/dev/null
-source "$BASH_ENV"
-which flutter
