@@ -22,7 +22,7 @@ steps:
       environment:
         ORB_EVAL_INSTALL_LOCATION: <<parameters.install-location>>
         ORB_VAL_FLUTTER_SDK_VERSION: <<parameters.version>>
-        ORB_VAL_FLUTTER_SDK_CHANNEL: <<parameters.channel>>
+        ORB_VAL_FLUTTER_RELEASE_CHANNEL: <<parameters.channel>>
       command: <<include(scripts/install-sdk.sh)>>
   - run:
       name: Run flutter doctor
