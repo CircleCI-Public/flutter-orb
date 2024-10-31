@@ -1,6 +1,10 @@
 description: >
   Install Flutter SDK and your flutter packages with automated caching and best practices applied. Requires lock file.
 parameters:
+  channel:
+    type: string
+    description: The release channel your version is in. Valid options: `stable` and `beta`
+    default: "stable"
   version:
     type: string
     description: The target version for the Flutter SDK.
@@ -19,6 +23,7 @@ parameters:
     type: string
 steps:
   - install_sdk:
+      version: <<parameters.channel>>
       version: <<parameters.version>>
       install-location: <<parameters.install-location>>
   - install_pub:
