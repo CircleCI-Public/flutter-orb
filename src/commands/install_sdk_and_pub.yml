@@ -23,7 +23,7 @@ parameters:
     type: string
 steps:
   - install_sdk:
-      version: <<parameters.channel>>
+      channel: <<parameters.channel>>
       version: <<parameters.version>>
       install-location: <<parameters.install-location>>
   - install_pub:
