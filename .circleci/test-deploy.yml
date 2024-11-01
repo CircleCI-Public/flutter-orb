@@ -19,7 +19,24 @@ jobs:
           app-dir: ./sample
       - flutter/install_ios_gem:
           app-dir: ./sample
-      - run: 
+      - run:
+          name: 'check that the sdk is installed properly'
+          command: cd sample && flutter doctor && rbenv version
+  integration-test-channel-beta:
+    macos:
+      xcode: 14.2.0
+    resource_class: macos.m1.large.gen1
+    steps:
+      - checkout
+      - flutter/install_sdk_and_pub:
+          app-dir: ./sample
+          channel: beta
+          version: 3.27.0-0.1.pre33
+      - flutter/install_ios_pod:
+          app-dir: ./sample
+      - flutter/install_ios_gem:
+          app-dir: ./sample
+      - run:
           name: 'check that the sdk is installed properly'
           command: cd sample && flutter doctor && rbenv version
   integration-test-linux:
@@ -35,7 +52,7 @@ jobs:
           app-dir: ./sample
       - flutter/install_android_gem:
           app-dir: ./sample
-      - run: 
+      - run:
           name: 'check that the sdk is installed properly'
           command: cd sample && flutter doctor && rvm version
 workflows:
@@ -43,6 +60,8 @@ workflows:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
       - integration-test-macos:
+          filters: *filters
+      - integration-test-channel-beta:
           filters: *filters
       - integration-test-linux:
           filters: *filters
