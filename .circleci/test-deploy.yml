@@ -42,7 +42,7 @@ jobs:
   integration-test-linux:
     executor:
       name: android/android_machine
-      tag: '2022.09.1'
+      tag: 'default'
     steps:
       - checkout
       - flutter/install_sdk_and_pub:
