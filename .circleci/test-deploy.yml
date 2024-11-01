@@ -37,7 +37,7 @@ jobs:
       - flutter/install_ios_gem:
           app-dir: ./sample
       - run:
-          name: "check that the sdk is installed properly"
+          name: "check that the sdk is installed properly from the beta channel"
           command: cd sample && flutter doctor && rbenv version
   integration-test-linux:
     executor:
