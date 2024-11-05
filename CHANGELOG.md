@@ -7,12 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
  - Current development changes [ to be moved to release ]
 
-## [1.0.0] - YYYY-MM-DD
+## [2.1.0] - 2024-10-31
 ### Added
- - Initial Release
-### Changed
- - Initial Release
-### Removed
+- feat: added channal parameter to `flutter/install_sdk` and `flutter/install_sdk_and_pub` so that you can install from `beta` releases if you want
+
+## [2.0.4] - 2024-04-06
+- fix: flutter installation fail by @KevinJ1008 in #41
+- fix: Address broken install script by @zaki-arain in #44
+
+## [1.0.0] - 2020-06-22
  - Initial Release
 
 
