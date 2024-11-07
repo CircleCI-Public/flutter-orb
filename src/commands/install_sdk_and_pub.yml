@@ -29,4 +29,4 @@ steps:
       install-location: <<parameters.install-location>>
   - install_pub:
       app-dir: <<parameters.app-dir>>
-      cache-version: <<parameters.app-dir>>
+      cache-version: <<parameters.cache-version>>
