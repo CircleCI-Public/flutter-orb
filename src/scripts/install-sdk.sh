@@ -10,8 +10,8 @@ function install_flutter() {
   [[ $arch =~ "arm64" ]] && version="flutter_${uname}_arm64" || version="flutter_${uname}"
   [[ $uname == "linux" ]] && suffix="tar.xz" || suffix="zip"
 
-  baseurl="https://storage.googleapis.com/flutter_infra_release/releases/stable"
-  fullurl="$baseurl/$uname/${version}_$ORB_VAL_FLUTTER_SDK_VERSION-stable.${suffix}"
+  baseurl="https://storage.googleapis.com/flutter_infra_release/releases/$ORB_VAL_FLUTTER_RELEASE_CHANNEL"
+  fullurl="$baseurl/$uname/${version}_$ORB_VAL_FLUTTER_SDK_VERSION-$ORB_VAL_FLUTTER_RELEASE_CHANNEL.${suffix}"
 
   curl -o "flutter_sdk.${suffix}" "$fullurl"
 
