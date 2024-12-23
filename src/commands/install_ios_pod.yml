@@ -10,9 +10,9 @@ parameters:
     description: Change the default cache version if you need to clear the cache for any reason.
     type: string
   repo-update:
-            default: false
-            description: Whether to run 'pod install' with the '--repo-update' option.
-            type: boolean
+    default: false
+    description: Whether to run 'pod install' with the '--repo-update' option.
+    type: boolean
 steps:
   - restore_cache:
       keys:
