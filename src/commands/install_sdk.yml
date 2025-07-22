@@ -9,8 +9,8 @@ parameters:
   version:
     type: string
     description: The target version for the Flutter SDK.
-    default: "3.0.3"
-  install-location:
+    default: "3.32.7"
+  install_location:
     type: string
     default: "~/usr/development"
     description: Install path for the Flutter binaries.
@@ -21,7 +21,7 @@ steps:
   - run:
       name: Install Flutter SDK if it does not exists
       environment:
-        ORB_EVAL_INSTALL_LOCATION: <<parameters.install-location>>
+        ORB_EVAL_INSTALL_LOCATION: <<parameters.install_location>>
         ORB_VAL_FLUTTER_SDK_VERSION: <<parameters.version>>
         ORB_VAL_FLUTTER_RELEASE_CHANNEL: <<parameters.channel>>
       command: <<include(scripts/install-sdk.sh)>>
@@ -31,4 +31,4 @@ steps:
   - save_cache:
       key: flutter-<<parameters.version>>-{{ arch }}
       paths:
-        - <<parameters.install-location>>
+        - <<parameters.install_location>>

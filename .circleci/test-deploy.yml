@@ -1,62 +1,76 @@
 version: 2.1
 orbs:
-  flutter: circleci/flutter@dev:<<pipeline.git.revision>>
-  orb-tools: circleci/orb-tools@11.1
-  android: circleci/android@3.0.1
+  flutter: {}
+  orb-tools: circleci/orb-tools@12.3.1
+  android: circleci/android@3.1.0
+parameters:
+  cache_version:
+    type: string
+    default: v1.2
 filters: &filters
   tags:
     only: /.*/
 jobs:
   integration-test-macos:
     macos:
-      xcode: 14.2.0
+      xcode: 16.3.0
     resource_class: macos.m1.large.gen1
     steps:
       - checkout
       - flutter/install_sdk_and_pub:
-          app-dir: ./sample
+          cache_version: <<pipeline.parameters.cache_version >>
+          version: 3.32.7
+          app_dir: ./sample
       - flutter/install_ios_pod:
-          repo-update: true
-          app-dir: ./sample
+          cache_version: <<pipeline.parameters.cache_version >>
+          repo_update: true
+          app_dir: ./sample
       - flutter/install_ios_gem:
-          app-dir: ./sample
+          cache_version: <<pipeline.parameters.cache_version >>
+          app_dir: ./sample
       - run:
           name: 'check that the sdk is installed properly'
           command: cd sample && flutter doctor && rbenv version
   integration-test-channel-beta:
     macos:
-      xcode: 14.2.0
+      xcode: 16.3.0
     resource_class: macos.m1.large.gen1
     steps:
       - checkout
       - flutter/install_sdk_and_pub:
-          app-dir: ./sample
+          cache_version: <<pipeline.parameters.cache_version >>
+          app_dir: ./sample
           channel: beta
           version: 3.27.0-0.1.pre
       - flutter/install_ios_pod:
-          repo-update: true
-          app-dir: ./sample
+          cache_version: <<pipeline.parameters.cache_version >>
+          repo_update: true
+          app_dir: ./sample
       - flutter/install_ios_gem:
-          app-dir: ./sample
+          cache_version: <<pipeline.parameters.cache_version >>
+          app_dir: ./sample
       - run:
           name: 'check that the sdk is installed properly from the beta channel'
           command: cd sample && flutter doctor && rbenv version
   integration-test-linux:
     executor:
       name: android/android_machine
-      tag: '2022.12.1'
+      tag: '2024.11.1'
     steps:
       - checkout
       - flutter/install_sdk_and_pub:
-          cache-version: v2
-          app-dir: ./sample
+          version: 3.32.7
+          cache_version: <<pipeline.parameters.cache_version >>
+          app_dir: ./sample
       - flutter/install_android_gradle_dependencies:
-          app-dir: ./sample
+          cache_version: <<pipeline.parameters.cache_version >>
+          app_dir: ./sample
       - flutter/install_android_gem:
-          app-dir: ./sample
+          cache_version: <<pipeline.parameters.cache_version >>
+          app_dir: ./sample
       - run:
           name: 'check that the sdk is installed properly'
-          command: cd sample && flutter doctor && rvm version
+          command: cd sample && flutter doctor
 workflows:
   test-deploy:
     jobs:
@@ -68,20 +82,22 @@ workflows:
       - integration-test-linux:
           filters: *filters
       - flutter/unit_test:
-          app-dir: ./sample
-          registry: "ghcr.io/cirruslabs"
-          version: "3.7.7"
+          cache_version: <<pipeline.parameters.cache_version >>
+          app_dir: ./sample
+          version: "3.32.7"
           filters: *filters
       - flutter/lint:
-          app-dir: ./sample
+          version: 3.32.7
+          cache_version: <<pipeline.parameters.cache_version >>
+          app_dir: ./sample
           filters: *filters
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
-          orb-name: circleci/flutter
-          vcs-type: << pipeline.project.type >>
-          github-token: GHI_TOKEN
-          pub-type: production
+          orb_name: circleci/flutter
+          vcs_type: << pipeline.project.type >>
+          github_token: GHI_TOKEN
+          pub_type: production
           requires:
             - orb-tools/pack
             - integration-test-macos
