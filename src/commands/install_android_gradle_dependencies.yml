@@ -11,13 +11,13 @@ parameters:
     type: string
 steps:
   - run:
-    name: Calculate cache key
-    command: |
-      if [ -f "<< parameters.app-dir >>/android/app/build.gradle" ]; then
-        md5sum << parameters.app-dir >>/android/app/build.gradle > ~/gradle_cache_key
-      else
-        md5sum << parameters.app-dir >>/android/app/build.gradle.kts > ~/gradle_cache_key
-      fi
+      name: Calculate cache key
+      command: |
+        if [ -f "<< parameters.app-dir >>/android/app/build.gradle" ]; then
+          md5sum << parameters.app-dir >>/android/app/build.gradle > ~/gradle_cache_key
+        else
+          md5sum << parameters.app-dir >>/android/app/build.gradle.kts > ~/gradle_cache_key
+        fi
   - restore_cache:
       key: gradle-<<parameters.cache-version>>-{{ checksum  "~/gradle_cache_key" }}
   - run:
