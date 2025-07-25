@@ -8,4 +8,4 @@ usage:
     test:
       jobs:
         - flutter/unit_test:
-            version: 3.0.3
+            version: 3.32.7
