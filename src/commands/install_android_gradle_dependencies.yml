@@ -1,5 +1,5 @@
 description: >
-  Install your Android gradle packages with automated caching and best practices applied. Requires build.gradle file.
+  Install your Android gradle packages with automated caching and best practices applied. Requires build.gradle or build.gradle.kts file.
 parameters:
   app-dir:
     default: .
@@ -10,8 +10,16 @@ parameters:
     description: Change the default cache version if you need to clear the cache for any reason.
     type: string
 steps:
+  - run:
+      name: Calculate cache key
+      command: |
+        if [ -f "<< parameters.app-dir >>/android/app/build.gradle" ]; then
+          md5sum << parameters.app-dir >>/android/app/build.gradle > ~/gradle_cache_key
+        else
+          md5sum << parameters.app-dir >>/android/app/build.gradle.kts > ~/gradle_cache_key
+        fi
   - restore_cache:
-      key: gradle-<<parameters.cache-version>>-{{ checksum  "<< parameters.app-dir >>/android/app/build.gradle" }}
+      key: gradle-<<parameters.cache-version>>-{{ checksum  "~/gradle_cache_key" }}
   - run:
       name: Installing Android gradle packages
       command: gradle androidDependencies
@@ -20,4 +28,4 @@ steps:
       paths:
         - ~/.gradle/caches
         - ~/.gradle/wrapper
-      key: gradle-<<parameters.cache-version>>-{{ checksum  "<< parameters.app-dir >>/android/app/build.gradle" }}
+      key: gradle-<<parameters.cache-version>>-{{ checksum  "~/gradle_cache_key" }}
