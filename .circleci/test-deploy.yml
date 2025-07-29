@@ -19,7 +19,7 @@ jobs:
       - checkout
       - flutter/install_sdk_and_pub:
           cache_version: <<pipeline.parameters.cache_version >>
-          version: 3.32.7
+          version: 3.32.5
           app_dir: ./sample
       - flutter/install_ios_pod:
           cache_version: <<pipeline.parameters.cache_version >>
@@ -59,7 +59,7 @@ jobs:
     steps:
       - checkout
       - flutter/install_sdk_and_pub:
-          version: 3.32.7
+          version: 3.32.5
           cache_version: <<pipeline.parameters.cache_version >>
           app_dir: ./sample
       - flutter/install_android_gradle_dependencies:
@@ -84,10 +84,10 @@ workflows:
       - flutter/unit_test:
           cache_version: <<pipeline.parameters.cache_version >>
           app_dir: ./sample
-          version: "3.32.7"
+          version: "3.32.5"
           filters: *filters
       - flutter/lint:
-          version: 3.32.7
+          version: 3.32.5
           cache_version: <<pipeline.parameters.cache_version >>
           app_dir: ./sample
           filters: *filters
